@@ -67,7 +67,7 @@ export default [
     aiPrompt: 'Give me Best SEO optimized high ranked 5 title ideas bullet wise only bases on keywords and outline and give me result in HTML tags format',
     form: [
       {
-        label: 'Enter your youtube video topic keyowords',
+        label: 'Enter your youtube video topic keywords',
         field: 'input',
         name: 'keywords',
         required: true

@@ -1,5 +1,3 @@
-
-
 import Templates from '@/app/(templates)/Templates'
 import React, { useEffect, useState } from 'react'
 import TemplateCard from './TemplateCard'
@@ -19,30 +17,46 @@ export interface FORM {
   field: string,
   name: string,
   required?: boolean,
-
 }
 
 const TemplateSection = ({ searchInput }: any) => {
 
-  const [templateList, setTemplateList] = useState(Templates)
+  const [templateList, setTemplateList] = useState<TEMPLATE[]>(Templates)
+  const [noResults, setNoResults] = useState<boolean>(false)
+
   useEffect(() => {
-    console.log(searchInput)
     if (searchInput) {
-      const filterData = Templates.filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()));
-      setTemplateList(filterData)
+      const filterData = Templates.filter(item =>
+        item.name.toLowerCase().includes(searchInput.toLowerCase())
+      );
+
+      if (filterData.length > 0) {
+        setTemplateList(filterData);
+        setNoResults(false);
+      } else {
+        setTemplateList([]);
+        setNoResults(true);
+      }
+
+    } else {
+      setTemplateList(Templates);
+      setNoResults(false);
     }
-    else {
-      setTemplateList(Templates)
-    }
-  }, [searchInput])
+  }, [searchInput]);
 
   return (
-    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-10'>
-      {templateList.map((item: TEMPLATE, index: number) => (
-        <TemplateCard key={index} {...item} />
-      ))}
+    <div className='p-10'>
+      {noResults ? (
+        <div className='text-black text-center flex justify-center items-center font-semibold mt-[15%]'>No results found</div>
+      ) : (
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
+          {templateList.map((item: TEMPLATE, index: number) => (
+            <TemplateCard key={index} {...item} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
 
-export default TemplateSection
+export default TemplateSection;

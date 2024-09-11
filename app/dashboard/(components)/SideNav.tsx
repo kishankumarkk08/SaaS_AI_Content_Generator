@@ -37,7 +37,7 @@ const SideNav = () => {
   return (
     <div className='h-screen p-5 shadow-sm border'>
       <div className='flex justify-center'>
-        <Image src={'/logo.svg'} alt="logo" width={60} height={40} />
+        <Image src={'/logo.svg'} alt="logo" width={50} height={60} />
       </div>
       <div className='mt-12 flex justify-center flex-col'>
         {List.map((menu, index) => (
