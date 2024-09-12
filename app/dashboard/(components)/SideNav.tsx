@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { FileClock, Home, Settings, WalletCards } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 const SideNav = () => {
 
@@ -41,10 +42,12 @@ const SideNav = () => {
       </div>
       <div className='mt-12 flex justify-center flex-col'>
         {List.map((menu, index) => (
-          <div key={index} className={`flex gap-3 mb-3 p-3 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${path == menu.path && 'bg-primary text-white'}`}>
-            <menu.icon />
-            <h2>{menu.name}</h2>
-          </div>
+          <Link href={menu.path}>
+            <div key={index} className={`flex gap-3 mb-3 p-3 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${path == menu.path && 'bg-primary text-white'}`}>
+              <menu.icon />
+              <h2>{menu.name}</h2>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
