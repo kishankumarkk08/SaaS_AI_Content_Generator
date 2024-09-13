@@ -1,14 +1,15 @@
 import React from 'react'
 import HistoryHeader from './_components/HistoryHeader'
+import FetchedData from './_components/fetchedData'
 
-const page = () => {
+
+const page = async () => {
+
   return (
     <div>
-      <div className='p-8 flex flex-col gap-1'>
-        <h1 className='font-bold text-3xl'>History</h1>
-        <p className='text-slate-800'>Get your previously generated content</p>
+      <div className='font-bold text-2xl flex justify-center mt-[15%]'>
+        History feature will be added soon!
       </div>
-      <HistoryHeader />
     </div>
   )
 }

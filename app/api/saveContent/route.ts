@@ -2,7 +2,6 @@
 
 import prisma from '../../../lib/prisma';
 import { NextResponse } from 'next/server';
-import moment from 'moment';
 
 export async function POST(request: Request) {
   try {
@@ -21,6 +20,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, data: result });
   } catch (error) {
     console.error('Error saving content:', error);
-    return NextResponse.json({ success: false, error: error.message });
+    return NextResponse.json({ success: false, error });
   }
 }

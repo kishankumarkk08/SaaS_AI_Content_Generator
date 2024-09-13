@@ -9,9 +9,7 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { chatSession } from '@/utils/AIModal'
 import { useUser } from '@clerk/nextjs'
-
-
-
+import axios from 'axios';
 
 interface SLUGPROPS {
   params: {
@@ -41,25 +39,17 @@ const ContentPage = (props: SLUGPROPS) => {
   }
   const saveInDb = async (formData: any, slug: any, aiResponse: any) => {
     try {
-      const response = await fetch('/api/saveContent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          formData,
-          slug,
-          aiResponse,
-          createdBy: user?.primaryEmailAddress?.emailAddress || '',
-        }),
+      const response = await axios.post('/api/saveContent', {
+        formData,
+        slug,
+        aiResponse,
+        createdBy: user?.primaryEmailAddress?.emailAddress || '',
       });
-      console.log(response.text)
 
-      const result = await response.json();
-      if (!result.success) {
-        console.error('Error:', result.error);
+      if (!response.data.success) {
+        console.error('Error:', response.data.error);
       } else {
-        console.log('Data saved:', result.data);
+        console.log('Data saved:', response.data.data);
       }
     } catch (error) {
       console.error('Failed to save in DB:', error);
