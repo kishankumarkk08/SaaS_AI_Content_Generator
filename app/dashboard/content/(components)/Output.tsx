@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react';
 
 interface RESULT {
-  result: string | undefined
+  result: string
 }
 
 const Output = ({ result }: RESULT) => {
@@ -20,7 +20,7 @@ const Output = ({ result }: RESULT) => {
     <div className='bg-white shadow-lg border rounded-lg'>
       <div className='flex justify-between items-center p-5'>
         <h2 className='font-bold'>Results</h2>
-        <Button className='flex gap-2'><Copy width={15} height={15} /></Button>
+        <Button className='flex gap-2' onClick={() => navigator.clipboard.writeText(result)}><Copy width={15} height={15} /></Button>
       </div>
       <Editor
         ref={editorRef}
