@@ -1,6 +1,6 @@
 import React from 'react'
-import HistoryHeader from './_components/HistoryHeader'
-import FetchedData from './_components/fetchedData'
+
+
 
 
 const page = async () => {

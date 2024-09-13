@@ -9,7 +9,11 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { chatSession } from '@/utils/AIModal'
 import { useUser } from '@clerk/nextjs'
-import axios from 'axios';
+import { db } from '@/utils/db'
+import { AIOutput } from '@/utils/schema'
+import moment from 'moment'
+
+
 
 interface SLUGPROPS {
   params: {
@@ -32,29 +36,21 @@ const ContentPage = (props: SLUGPROPS) => {
     const aiResponse = await result.response.text()
     // console.log(result.response.text())
     setResult(result.response.text())
-    saveInDb(formData, selectedTemplate?.slug, aiResponse)
+    saveInDb(JSON.stringify(formData), selectedTemplate?.slug, aiResponse)
     setLoading(false)
 
 
   }
-  const saveInDb = async (formData: any, slug: any, aiResponse: any) => {
-    try {
-      const response = await axios.post('/api/saveContent', {
-        formData,
-        slug,
-        aiResponse,
-        createdBy: user?.primaryEmailAddress?.emailAddress || '',
-      });
-
-      if (!response.data.success) {
-        console.error('Error:', response.data.error);
-      } else {
-        console.log('Data saved:', response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to save in DB:', error);
-    }
-  };
+  const saveInDb = async (formData: any, slug: any, aiResponse: string) => {
+    const result = await db.insert(AIOutput).values({
+      formData: formData || '',
+      templateSlug: slug || '',
+      aiResponse: aiResponse || '',
+      createdBy: user?.primaryEmailAddress?.emailAddress || '',
+      createdAt: moment().format('DD/MM/YYYY')
+    })
+    console.log(result)
+  }
 
 
 
@@ -75,6 +71,7 @@ const ContentPage = (props: SLUGPROPS) => {
       </div>
     </div>
   )
+
 }
 
 export default ContentPage
