@@ -6,7 +6,7 @@ const HistoryHeader = () => {
       <div className='col-span-2 text-lg font-semibold ml-8'>TEMPLATE</div>
       <div className='col-span-4 text-lg font-semibold ml-8'>AI RESPONSE</div>
       <div className='col-span-2 text-lg font-semibold ml-8'>DATE</div>
-      <div className='col-span-2 text-lg font-semibold ml-8'></div>
+      <div className='col-span-2 text-lg font-semibold ml-8'>COPY</div>
     </div>
   )
 }

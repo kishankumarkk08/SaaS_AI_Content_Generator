@@ -42,8 +42,8 @@ const SideNav = () => {
       </div>
       <div className='mt-12 flex justify-center flex-col'>
         {List.map((menu, index) => (
-          <Link href={menu.path}>
-            <div key={index} className={`flex gap-3 mb-3 p-3 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${path == menu.path && 'bg-primary text-white'}`}>
+          <Link href={menu.path} key={index}>
+            <div className={`flex gap-3 mb-3 p-3 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${path == menu.path && 'bg-primary text-white'}`}>
               <menu.icon />
               <h2>{menu.name}</h2>
             </div>

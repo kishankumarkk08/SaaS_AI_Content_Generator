@@ -9,9 +9,7 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { chatSession } from '@/utils/AIModal'
 import { useUser } from '@clerk/nextjs'
-import { db } from "../../../../utils/db"
-import { res } from '@/utils/schema'
-import moment from "moment"
+
 
 
 
@@ -36,22 +34,39 @@ const ContentPage = (props: SLUGPROPS) => {
     const aiResponse = await result.response.text()
     // console.log(result.response.text())
     setResult(result.response.text())
-    await saveInDb(JSON.stringify(formData), selectedTemplate?.slug, aiResponse)
+    saveInDb(formData, selectedTemplate?.slug, aiResponse)
     setLoading(false)
 
 
   }
-
   const saveInDb = async (formData: any, slug: any, aiResponse: any) => {
-    const result = await db.insert(res).values({
-      formData: formData || '',
-      slug: slug || '',
-      aiResponse: aiResponse || '',
-      createdBy: user?.primaryEmailAddress?.emailAddress || '',
-      createdAt: moment().format('DD/MM/YYYY')
-    })
-    console.log(result)
-  }
+    try {
+      const response = await fetch('/api/saveContent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          formData,
+          slug,
+          aiResponse,
+          createdBy: user?.primaryEmailAddress?.emailAddress || '',
+        }),
+      });
+      console.log(response.text)
+
+      const result = await response.json();
+      if (!result.success) {
+        console.error('Error:', result.error);
+      } else {
+        console.log('Data saved:', result.data);
+      }
+    } catch (error) {
+      console.error('Failed to save in DB:', error);
+    }
+  };
+
+
 
 
 
