@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { FileClock, Home, LayoutDashboardIcon, Settings, WalletCards } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-
+import Usage from './Usage'
 const SideNav = () => {
 
   const path = usePathname();
@@ -41,7 +41,7 @@ const SideNav = () => {
   ]
 
   return (
-    <div className='h-screen p-5 shadow-sm border'>
+    <div className='h-screen relative p-5 shadow-sm border'>
       <div className='flex justify-center'>
         <Image src={'/logo.svg'} alt="logo" width={50} height={60} />
       </div>
@@ -54,6 +54,9 @@ const SideNav = () => {
             </div>
           </Link>
         ))}
+      </div>
+      <div className='absolute bottom-10 left-0 w-full'>
+        <Usage />
       </div>
     </div>
   )
