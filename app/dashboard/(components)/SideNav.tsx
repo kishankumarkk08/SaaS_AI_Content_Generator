@@ -29,7 +29,7 @@ const SideNav = () => {
       path: '/dashboard/history'
     },
     {
-      name: "Billing",
+      name: "Pricing",
       icon: WalletCards,
       path: '/dashboard/billing'
     },

@@ -57,7 +57,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-indigo-50 to-indigo-100 p-10">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-10">
       <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Free Plan Card */}
