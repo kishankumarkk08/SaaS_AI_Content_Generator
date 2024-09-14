@@ -7,6 +7,7 @@ import { eq } from 'drizzle-orm'
 import { useUser } from '@clerk/nextjs'
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext'
 import { UserSubsContext } from '@/app/(context)/UserSubsContext'
+import { UpdateCreditsContext } from '@/app/(context)/UpdateCreditsContext'
 
 interface HISTORY {
   id: Number,
@@ -21,12 +22,17 @@ const Usage = () => {
   const { user } = useUser()
   const { totalUsage, setTotalUsage } = useContext(TotalUsageContext)
   const { userSubscription, setUserSubscription } = useContext(UserSubsContext)
+  const { credits, setCredits } = useContext(UpdateCreditsContext)
 
 
   useEffect(() => {
     user && GetData();
     user && isSubscribed();
   }, [user])
+
+  useEffect(() => {
+    user && GetData()
+  }, [credits && user])
 
   const GetData = async () => {
     // @ts-ignore

@@ -15,6 +15,7 @@ import moment from 'moment'
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext'
 import { useRouter } from 'next/navigation'
 import { UserSubsContext } from '@/app/(context)/UserSubsContext'
+import { UpdateCreditsContext } from '@/app/(context)/UpdateCreditsContext'
 
 
 
@@ -33,7 +34,13 @@ const ContentPage = (props: SLUGPROPS) => {
   const router = useRouter();
   const { totalUsage, setTotalUsage } = useContext(TotalUsageContext)
   const { userSubscription, setUserSubscription } = useContext(UserSubsContext)
+  const { credits, setCredits } = useContext(UpdateCreditsContext)
 
+  /**
+   * Generate content from AI
+   * @param formData 
+   * @returns 
+   */
   const generateContent = async (formData: any) => {
     if (totalUsage >= 10000 && !userSubscription) {
       router.push('/dashboard/billing')
@@ -46,9 +53,10 @@ const ContentPage = (props: SLUGPROPS) => {
     const aiResponse = await result.response.text()
     // console.log(result.response.text())
     setResult(result.response.text())
-    saveInDb(JSON.stringify(formData), selectedTemplate?.slug, aiResponse)
+    await saveInDb(JSON.stringify(formData), selectedTemplate?.slug, aiResponse)
     setLoading(false)
 
+    setCredits(Date.now())
 
   }
   const saveInDb = async (formData: any, slug: any, aiResponse: string) => {
