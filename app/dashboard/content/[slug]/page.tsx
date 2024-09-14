@@ -14,6 +14,7 @@ import { AIOutput } from '@/utils/schema'
 import moment from 'moment'
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext'
 import { useRouter } from 'next/navigation'
+import { UserSubsContext } from '@/app/(context)/UserSubsContext'
 
 
 
@@ -31,9 +32,10 @@ const ContentPage = (props: SLUGPROPS) => {
   const { user } = useUser()
   const router = useRouter();
   const { totalUsage, setTotalUsage } = useContext(TotalUsageContext)
+  const { userSubscription, setUserSubscription } = useContext(UserSubsContext)
 
   const generateContent = async (formData: any) => {
-    if (totalUsage >= 10000) {
+    if (totalUsage >= 10000 && !userSubscription) {
       router.push('/dashboard/billing')
       return;
     }

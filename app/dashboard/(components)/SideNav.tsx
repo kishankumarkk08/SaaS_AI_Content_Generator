@@ -5,12 +5,12 @@ import { FileClock, Home, LayoutDashboardIcon, Settings, WalletCards } from 'luc
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Usage from './Usage'
-const SideNav = () => {
 
+const SideNav = () => {
   const path = usePathname();
   useEffect(() => {
     console.log(path)
-  }, [path]) // Make sure to include path in the dependency array
+  }, [path])
 
   const List = [
     {
@@ -41,21 +41,21 @@ const SideNav = () => {
   ]
 
   return (
-    <div className='h-screen relative p-5 shadow-sm border'>
+    <div className='h-screen bg-gray-100 p-5 shadow-md border-r border-gray-300'>
       <div className='flex justify-center'>
         <Image src={'/logo.svg'} alt="logo" width={50} height={60} />
       </div>
-      <div className='mt-12 flex justify-center flex-col'>
+      <div className='mt-12 flex flex-col space-y-3'>
         {List.map((menu, index) => (
           <Link href={menu.path} key={index}>
-            <div className={`flex gap-3 mb-3 p-3 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${path === menu.path ? 'bg-primary text-white' : ''}`}>
-              <menu.icon />
-              <h2>{menu.name}</h2>
+            <div className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors duration-300 ${path === menu.path ? 'bg-indigo-600 text-white' : ' text-gray-700 hover:bg-indigo-500 hover:text-white'}`}>
+              <menu.icon className="w-5 h-5" />
+              <h2 className='text-lg font-medium'>{menu.name}</h2>
             </div>
           </Link>
         ))}
       </div>
-      <div className='absolute bottom-10 left-0 w-full'>
+      <div className='absolute bottom-10 left-0 w-full px-5'>
         <Usage />
       </div>
     </div>
