@@ -28,7 +28,7 @@ const FormSection = ({ selectedTemplate, userFormInput, loading }: SELECTEDTEMPL
     userFormInput(formData)
   }
   return (
-    <div className='p-5 shadow-md border rounded-lg'>
+    <div className='p-5 shadow-md border rounded-lg bg-white'>
       {/* @ts-ignore */}
       <Image src={selectedTemplate?.icon} alt='icon' width={70} height={70} />
       <h2 className='font-bold text-2xl mb-2 mt-3 text-primary'>{selectedTemplate?.name}</h2>

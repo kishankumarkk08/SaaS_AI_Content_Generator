@@ -77,7 +77,7 @@ const ContentPage = (props: SLUGPROPS) => {
   const selectedTemplate: TEMPLATE | undefined = Templates?.find((item) => item.slug == props.params.slug)
 
   return (
-    <div className='p-5'>
+    <div className='p-5 bg-gray-100'>
       <Link href={'/dashboard'}>
         <Button><ArrowLeft></ArrowLeft></Button>
       </Link>

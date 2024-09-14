@@ -2,7 +2,6 @@
 import { db } from '@/utils/db';
 import { UserSubscription } from '@/utils/schema';
 import axios from 'axios';
-import { error } from 'console';
 import { Loader2Icon } from 'lucide-react';
 import React, { useState, useContext } from 'react';
 import { useUser } from '@clerk/nextjs';
