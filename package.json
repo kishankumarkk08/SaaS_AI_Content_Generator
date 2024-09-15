@@ -29,8 +29,10 @@
     "razorpay": "^2.9.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-tsparticles": "^2.12.2",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "tsparticles": "^3.5.0",
     "vaul": "^0.9.3"
   },
   "devDependencies": {
