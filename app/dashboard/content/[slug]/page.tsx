@@ -84,7 +84,7 @@ const ContentPage = (props: SLUGPROPS) => {
       <div className='grid grid-cols-1 md:grid-cols-3 gap-10 py-5'>
         <FormSection selectedTemplate={selectedTemplate} userFormInput={(e: any) => generateContent(e)} loading={loading} />
         <div className='col-span-2'>
-          <Output result={result} />
+          <Output result={result || ''} />
         </div>
       </div>
     </div>

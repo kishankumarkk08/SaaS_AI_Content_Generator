@@ -51,12 +51,19 @@ const Usage = () => {
   }
 
   const isSubscribed = async () => {
-    const result = await db.select().from(UserSubscription).where(eq(UserSubscription.email, user?.primaryEmailAddress?.emailAddress))
+    if (!user?.primaryEmailAddress?.emailAddress) {
+      return;
+    }
+
+    const result = await db
+      .select()
+      .from(UserSubscription)
+      .where(eq(UserSubscription.email, user.primaryEmailAddress.emailAddress));
 
     if (result) {
-      setUserSubscription(true)
+      setUserSubscription(true);
     }
-  }
+  };
   return (
     <div>
       <div className='bg-gradient-to-br from-indigo-600 to-purple-600 text-white p-3 rounded-lg shadow-lg w-full'>
